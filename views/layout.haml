@@ -1,0 +1,61 @@
+!!!
+%html
+  %head
+    %link(rel="stylesheet" href="/css/global.css")
+    %link(rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css")
+    %script{:src => "http://code.jquery.com/jquery-1.9.1.js"}
+    %script{:src => "http://code.jquery.com/ui/1.9.0/jquery-ui.js"}
+    %script{:src => "/js/vivagraph.min.js"}
+    %script{:src => "/js/neonews.js"}
+    %title Neo News
+
+  %body{:onload => "onLoad()"}
+    %div#graph
+    %header
+      %section#title
+        %h1 Neo News
+        %p What's going on in the world?
+      %section#search
+        %form{:action => "/", :method => "get"}
+          %label Search:
+          %input#neoid{:type => "text", :value => "#{@neoid}", :name => "neoid"}
+          %input#loadnode{:type => "submit", :value => "Load", :class => "button"}
+      %br{:style => "clear: both;"}
+    %section#content
+      = yield
+    %aside
+      %div#explanation
+        / Neo News introduction
+        %h2 About
+        %p
+          Explore the News in  
+          %a{:href => "http://neo4j.org"} Neo4j 
+          by using the 
+          %a{:href => "https://github.com/maxdemarzi/neography"} Neography
+          Gem.
+
+        %h3 Get started
+        %p
+          Start using the browser by just typing in the search text field.
+
+        %h3 Credits
+        %p
+          This project was made by  
+          %a{:href => "http://maxdemarzi.com"} Max De Marzi
+          using: 
+          %a{:href => "https://github.com/anvaka/VivaGraphJS", :target => "_blank"} VivaGraphJS
+          ,
+          %a{:href => "http://neo4j.org", :target => "_blank"} Neo4j
+          and
+          %a{:href => "https://github.com/maxdemarzi/neography", :target => "_blank"} Neography.
+        %h3 Code          
+        %p
+          Available at
+          %a{:href => "https://github.com/maxdemarzi/neo_news", :target => "_blank"} Github    
+
+      <div id="browser_not_supported">
+      Your Browser is currently not supported.<br/><br/>Try one of these:<br/>
+      <a href="http://www.mozilla.com/en-US/firefox/firefox.html">Firefox</a><br/>
+      <a href="http://www.apple.com/safari/">Safari</a><br/>
+      <a href="http://www.google.com/chrome/">Chrome</a><br/>
+      </div>
