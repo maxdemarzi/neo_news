@@ -78,17 +78,17 @@ function onLoad() {
 
   graphics.node(function(node) {
     // node.data holds custom object passed to graph.addNode():
-    var ui = Viva.Graph.svg('text').attr('y', '-4px').text(node.data);
+    var ui = Viva.Graph.svg('text').attr('y', '-4px').text(node.data.label);
 
 	$(ui).hover(function() { // mouse over
 	                    highlightRelatedNodes(node.id, true);
+	                    loadUrl(node.data.uri);
 	                }, function() { // mouse out
 	                    highlightRelatedNodes(node.id, false);
 	                });
 	$(ui).click(function() { 
 				        console.log("click", node);
 			        	if (!node || !node.position) return;
-                      	loadUrl(node.id);
 			        	renderer.rerender();
 			        	loadData(graph,node.id);
 			}
