@@ -1,3 +1,4 @@
+# http://www.ryanalynporter.com/2012/06/12/simple-redis-caching-in-ruby/
 class Redis
 
   def cache(params)
