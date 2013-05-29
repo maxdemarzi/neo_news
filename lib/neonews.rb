@@ -21,6 +21,7 @@ NERD_POOL = ConnectionPool.new(:size => 10, :timeout => 3) { Nerdier::Nerd.new(N
 
 require 'active_support/core_ext/numeric/time'
 require 'neonews/redis_cache'
+require 'digest/sha1'
 
 require 'neonews/jobs/get_news'
 require 'neonews/jobs/get_article'

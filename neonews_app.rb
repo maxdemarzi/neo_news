@@ -32,10 +32,15 @@ class App < Sinatra::Base
 
     cypher = "START me=node(#{params[:id]}) 
               MATCH me -- related
-              RETURN ID(me), me.text, me.description, ID(related), related.text, related.description"
+              RETURN ID(me), me.text, me.description, me.type, ID(related), related.text, related.description, related.type"
 
     connections = neo.execute_query(cypher)["data"]   
-    connections.collect{|n| {"source" => n[0], "source_data" => {:label => n[1], :description => n[2]}, "target" => n[3], "target_data" => {:label => n[4], :description => n[5]}} }.to_json
+    connections.collect{|n| {"source" => n[0], "source_data" => {:label => n[1], 
+                                                                 :description => n[2],
+                                                                 :type => n[3] },
+                             "target" => n[4], "target_data" => {:label => n[5], 
+                                                                 :description => n[6],
+                                                                 :type => n[7]}} }.to_json
   end
 
   get '/external/:id' do

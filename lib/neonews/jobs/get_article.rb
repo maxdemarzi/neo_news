@@ -16,7 +16,7 @@ module Job
       
       unless @entities.empty?
         article = Pismo::Document.new(article_url)
-        article_hash = Crypto::Hash.sha256(article.html_body).encode!("UTF-8", :invalid => :replace, :undef => :replace)
+        article_hash = Digest::SHA1.hexdigest(article.html_body) #.encode!("UTF-8", :invalid => :replace, :undef => :replace)
                
         NEO4J_POOL.with do |neo|
           begin
@@ -31,7 +31,7 @@ module Job
           NEO4J_POOL.with do |neo|
             @article_node = neo.create_unique_node("articles", "uri", article_url, {"uri" => article_url,
                                                                                     "text" => article.title,
-                                                                                    "type" => "article",
+                                                                                    "type" => "Article",
                                                                                     "description" => article.html_body})
             neo.add_node_to_index("articles", "hash", article_hash, @article_node)                                                                          
           end

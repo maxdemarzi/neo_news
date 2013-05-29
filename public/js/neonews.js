@@ -66,7 +66,17 @@ function onLoad() {
 
   graphics.node(function(node) {
     // node.data holds custom object passed to graph.addNode():
-    var ui = Viva.Graph.svg('text').attr('y', '-4px').text(node.data.label);
+    //var ui = Viva.Graph.svg('text').attr('y', '-4px').text(node.data.label);
+
+	var ui = Viva.Graph.svg('g'),
+        svgText = Viva.Graph.svg('text').attr('y', '-4px').text(node.data.label),
+        img = Viva.Graph.svg('image')
+           .attr('width', 32)
+           .attr('height', 32)
+           .link('/img/' + node.data.type + '.png');
+
+    ui.append(svgText);
+    ui.append(img);
 
 	$(ui).hover(function() { // mouse over
 	                    highlightRelatedNodes(node.id, true);
@@ -82,7 +92,14 @@ function onLoad() {
 			}
 	);
 
-      return ui; 
+    return ui;
+  }).placeNode(function(nodeUI, pos) {
+      // 'g' element doesn't have convenient (x,y) attributes, instead
+      // we have to deal with transforms: http://www.w3.org/TR/SVG/coords.html#SVGGlobalTransformAttribute 
+      nodeUI.attr('transform', 
+                  'translate(' + 
+                        (pos.x - 16) + ',' + (pos.y - 16) + 
+                  ')');
   });
 	
   var renderer = Viva.Graph.View.renderer(graph,
