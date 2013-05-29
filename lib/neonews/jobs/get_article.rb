@@ -10,7 +10,7 @@ module Job
 
       @entities = Oj.load(HTTPClient.post_content("http://access.alchemyapi.com/calls/url/URLGetRankedNamedEntities",
       {:url => article_url, 
-       :apikey => ENV['ALCHEMY_API'],
+       :apikey => ENV['ALCHEMY_API'] || "0b1ac211c8d4469dd04013aa02ad0df23fb102e2",
        :outputMode => "json"}),
        {:'Accept-encoding' => "gzip"})["entities"]
       

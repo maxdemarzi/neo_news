@@ -42,16 +42,4 @@ class App < Sinatra::Base
                                                                  :description => n[6],
                                                                  :type => n[7]}} }.to_json
   end
-
-  get '/external/:id' do
-    content_type :json
-    redis = Redis.new
-        
-    content = redis.cache(:key => params[:id]) do
-      doc = Pismo::Document.new(URI.unescape(params[:id]))
-      {:title => doc.title, :author => doc.author, :lede => doc.lede, :keywords => doc.keywords}.to_json
-    end
-    content
-  end
-  
 end
