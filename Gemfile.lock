@@ -31,10 +31,6 @@ GEM
       os (>= 0.9.6)
       rake (>= 0.8.7)
       rubyzip (>= 0.9.7)
-    nerdier (0.0.3)
-      httpclient (>= 2.3.3)
-      json (>= 1.6.0)
-      oj (>= 2.0.12)
     nokogiri (1.5.9)
     oj (2.0.12)
     os (0.9.6)
@@ -113,7 +109,6 @@ DEPENDENCIES
   httpclient
   i18n
   neography
-  nerdier
   nokogiri
   oj
   pismo

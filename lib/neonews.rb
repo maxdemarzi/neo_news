@@ -13,11 +13,6 @@ Sidekiq.configure_client do |config|
 end
 
 NEO4J_POOL = ConnectionPool.new(:size => 10, :timeout => 3) { Neography::Rest.new }
-NERD_API = ENV['NERD_API'] || '1qab2v38p64api28bedp6rea8u695153'
-NERD_POOL = ConnectionPool.new(:size => 10, :timeout => 3) { Nerdier::Nerd.new(NERD_API) }
-
-#require 'ngs/models/user'
-#require 'ngs/models/thing'
 
 require 'active_support/core_ext/numeric/time'
 require 'neonews/redis_cache'

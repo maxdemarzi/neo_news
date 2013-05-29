@@ -10,13 +10,13 @@ module Job
 
       @entities = Oj.load(HTTPClient.post_content("http://access.alchemyapi.com/calls/url/URLGetRankedNamedEntities",
       {:url => article_url, 
-       :apikey => "0b1ac211c8d4469dd04013aa02ad0df23fb102e2",
+       :apikey => ENV['ALCHEMY_API'],
        :outputMode => "json"}),
        {:'Accept-encoding' => "gzip"})["entities"]
       
       unless @entities.empty?
         article = Pismo::Document.new(article_url)
-        article_hash = Digest::SHA1.hexdigest(article.html_body) #.encode!("UTF-8", :invalid => :replace, :undef => :replace)
+        article_hash = Digest::SHA1.hexdigest(article.html_body)
                
         NEO4J_POOL.with do |neo|
           begin
