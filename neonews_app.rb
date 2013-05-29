@@ -19,11 +19,11 @@ class App < Sinatra::Base
     neo = Neography::Rest.new    
 
     cypher = "START me=node:entities({query}) 
-              RETURN ID(me), me.label
-              ORDER BY me.label
+              RETURN ID(me), me.text
+              ORDER BY me.text
               LIMIT 15"
 
-    neo.execute_query(cypher, {:query => "label:*#{params[:term]}* OR uri:*#{params[:term]}*" })["data"].map{|x| { label: x[1], value: x[0]}}.to_json   
+    neo.execute_query(cypher, {:query => "text:*#{params[:term]}* OR uri:*#{params[:term]}*" })["data"].map{|x| { label: x[1], value: x[0]}}.to_json   
   end
 
   get '/edges/:id' do
@@ -32,10 +32,10 @@ class App < Sinatra::Base
 
     cypher = "START me=node(#{params[:id]}) 
               MATCH me -- related
-              RETURN ID(me), me.uri, COALESCE(me.label?, me.uri), ID(related), related.uri, COALESCE(related.label?, related.uri)"
+              RETURN ID(me), me.text, me.description, ID(related), related.text, related.description"
 
     connections = neo.execute_query(cypher)["data"]   
-    connections.collect{|n| {"source" => n[0], "source_data" => {:uri => n[1], :label => n[2]}, "target" => n[3], "target_data" => {:uri => n[4], :label => n[5]}} }.to_json
+    connections.collect{|n| {"source" => n[0], "source_data" => {:label => n[1], :description => n[2]}, "target" => n[3], "target_data" => {:label => n[4], :description => n[5]}} }.to_json
   end
 
   get '/external/:id' do

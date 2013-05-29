@@ -13,6 +13,7 @@ GEM
     dotenv (0.7.0)
     eventmachine (1.0.3)
     fast-stemmer (1.0.2)
+    ffi (1.8.1)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -50,6 +51,8 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.0.4)
+    rbnacl (1.1.0)
+      ffi
     redis (3.0.4)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
@@ -117,6 +120,7 @@ DEPENDENCIES
   nokogiri
   oj
   pismo
+  rbnacl
   redis
   sidekiq
   sidekiq-failures

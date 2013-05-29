@@ -35,18 +35,6 @@ function loadData(graph,id) {
     })
 }
 
-function loadUrl(url) {
-    $.ajax("/external/" + encodeURIComponent(url), {
-        type:"GET",
-        dataType:"json",
-        success:function (res) {
-            $('#explanation').html(res.lede);
-        }
-    })
-}
-
-
-
 function onLoad() {
   // Step 1. Create a graph:
   var graph = Viva.Graph.graph();	
@@ -82,7 +70,7 @@ function onLoad() {
 
 	$(ui).hover(function() { // mouse over
 	                    highlightRelatedNodes(node.id, true);
-	                    loadUrl(node.data.uri);
+	                    $('#explanation').html(node.data.description);
 	                }, function() { // mouse out
 	                    highlightRelatedNodes(node.id, false);
 	                });

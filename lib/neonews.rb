@@ -24,3 +24,4 @@ require 'neonews/redis_cache'
 
 require 'neonews/jobs/get_news'
 require 'neonews/jobs/get_article'
+require 'neonews/jobs/get_description'
